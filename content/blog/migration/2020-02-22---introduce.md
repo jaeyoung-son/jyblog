@@ -1,12 +1,9 @@
 ---
-title: 'about'
-date: 2019-1-27 16:21:13
-lang: 'en'
+title: '손재영'
+date: 2020-02-21 12:21:13
+category: 'introduce'
+draft: false
 ---
-
-# 손재영
-
-<div align="center">
 
 # 손재영
 
@@ -134,5 +131,3 @@ lang: 'en'
   ![](../images/ff.JPG)
   ![](../images/ff.JPG)
   ![](../images/ff.JPG)
-
-</div>
