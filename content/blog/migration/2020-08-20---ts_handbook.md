@@ -85,35 +85,22 @@ x[3] = 'hoho' // 에러 [string,number] 타입에는 프로퍼티 3이 없다.
 enum Color {
   Red,
   Green,
-<<<<<<< HEAD
   Blue,
-=======
-  Blue
->>>>>>> 3f1b45b0... 기본 데이터타입 추가
 }
-let c: Color = Color.Green;
+let c: Color = Color.Green
 ```
 
 중괄호로 감싸져 Color라는 타입을 정하고 약간 객체와 생김새가 비슷하다.  
 기본적으로 enum은 0부터 시작하여 멤버들의 번호를 매긴다. 멤버 중 하나의 값을 수동으로 설정하여 번호를 바꿀 수 있다.
 예를 들어 0대신 1부터 시작하게 번호를 바꿔줌.
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-> > > > > > > 5caf73d7... any 내용 추가
 
 ```ts
 enum Color {
   Red = 1,
   Green,
-<<<<<<< HEAD
   Blue,
-=======
-  Blue
->>>>>>> 5caf73d7... any 내용 추가
 }
-let c: Color = Color.Green;
+let c: Color = Color.Green
 ```
 
 모든 값을 수동으로 설정이 가능함.
@@ -122,11 +109,7 @@ let c: Color = Color.Green;
 enum Color {
   Red = 1,
   Green = 2,
-<<<<<<< HEAD
   Blue = 4,
-=======
-  Blue = 4
->>>>>>> 5caf73d7... any 내용 추가
 }
 ```
 
@@ -136,15 +119,11 @@ enum Color {
 enum Color {
   Red = 1,
   Green,
-<<<<<<< HEAD
   Blue,
-=======
-  Blue
->>>>>>> 5caf73d7... any 내용 추가
 }
-let colorName: string = Color[2];
+let colorName: string = Color[2]
 
-console.log(colorName); // 'Green'
+console.log(colorName) // 'Green'
 ```
 
 생소한 느낌도 있고, 어떠한 상황에 효율적일지 아직 잘 모르겠다 예제를 더 찾아보던가 해야겠다.
@@ -161,12 +140,6 @@ notSure = false
 
 let list: any[] = [1, true, 'anything']
 ```
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-> > > > > > > db9acdce... 데이터 타입 추가 never null undef
 
 #### void
 
@@ -213,12 +186,6 @@ create(null); // 성공
 create(42) // error
 create('string') // error
 ```
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-> > > > > > > c88a5088... 타입 단언 추가
 
 #### 타입 단언 type assertions
 
@@ -276,11 +243,6 @@ printLabel(myObj)
 
 타입 검사는 프로퍼티들의 순서를 요구하지 않는다. 단지 인터페이스가 요구하는 프로퍼티들이
 존재하는지와 프로퍼티들이 요구하는 타입을 가졌는지만 확인한다.
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-> > > > > > > f2e6c217... 프로퍼티 내용 업로드
 
 #### 선택적 프로퍼티 optional properties
 
@@ -327,11 +289,6 @@ p1.x = 5 // error
 
 타입스크립트에서는 모든 변경 메서드가 제거된 Array<T>와 동일한 ReadonlyArray<T>타입을 제공한다.
 생성 후에 배열을 변경하지 않음을 보장할 수 있다.
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-> > > > > > > 6aa8a626... 함수 타입 추가
 
 ```ts
 let a: number[] = [1, 2, 3, 4]
@@ -380,11 +337,6 @@ mySearch = function(source: string, subString: string) {
 인터페이스로 함수 타입을 설명하는 방법과 유사하게 a[10] 이나 agemap['daniel'] 처럼 타입을
 인덱스로 기술하 수 있다. 인덱서블 타입은 인덱싱 할때 해당 반환 유형과 함꼐 객체를 인덱싱하는데 사용할 수 있는 타입을 기술하는
 인덱스 시그니쳐를 가지고 있다.
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-> > > > > > > 323cbb7b... 함수 타입 추가
 
 ```ts
 interface StringArray {
@@ -432,11 +384,6 @@ let myAdd: (x: number, y: number) => number = function(
 
 매개변수들의 타입과 반환 타입 사이에 화살표를 써서 반환 타입을 분명히 할 수 있다. 함수 푝에 필요한 부분이다.
 값을 반환하지 않는다면 void를 써서 표시한다.
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-> > > > > > > c1595bf1... 제너릭 추가
 
 #### 선택적 매개변수와 기본 매개변수
 
@@ -485,11 +432,6 @@ function identity(arg: any): any {
 정보를 잃게된다.  
 대신에 무엇이 반환되는지 표시하기 위해 인수의 타입을 캡쳐할 방법이 필요한데 여기서 값이 아닌 타입에 적용되는 타입 변수를
 사용한다.
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-> > > > > > > 877b26ae... 제너릭 타입 변수 추가
 
 ```ts
 function identity<T>(arg: T): T {
@@ -534,11 +476,6 @@ function loggingIdentity<T>(arg: T[]): T[] {
 
 위의 예를 보면 타입 매개변수 T와 T배열인 인수 arg를 취하고, T배열을 반환한다.
 라고 읽을 수 있다. 만약 number배열을 넘기면 T가 number에 바인딩되므로 함수는 number배열을 얻게된다.
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-> > > > > > > cf2b4edd... 제너릭 내용 추가
 
 #### 제너릭 타입 Generic Types
 
@@ -588,12 +525,6 @@ loggingIdentity(3) // error number는 .length가 없다
 loggingIdentity({ length: 10, value: 3 })
 ```
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-> > > > > > > 205d8d79... 타입 별칭 추가
-
 #### 제너릭 제약조건에서 타입 매개변수 사용
 
 다른 타입 매개변수로 제한된 타입 매개변수를 선언할 수 있다. 이름이 있는 객체에서 프로퍼티를 가져오고
@@ -637,12 +568,6 @@ function getName(n: NameOrResolver): Name {
 type Container<T> = { value: T }
 ```
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-> > > > > > > 815ff091... 인터페이스와 타입별칭
-
 프로퍼티 안에서 자기 자신을 참조하는 타입 별칭을 가질 수 있다.
 
 ```ts
@@ -685,11 +610,6 @@ declare function interfaced(arg: Interface: Interface;
 
 에디터에서 interfaced에 마우스를 올리면 Interface를 반환한다고 보여주지만,
 aliased는 객체 리터럴 타입을 반환한다고 보여준다. 이게 새로운 이름을 만들지 못한다는 말인가?? 싶다.. 이전 버전에서는 차이가 꽤 있었지만 최신 버전으로 오면서 큰 차이는 없다고 한다.
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-> > > > > > > f74452d3... jsx as 업로드
 
 ## JSX와
 
@@ -713,11 +633,6 @@ const foo = bar as foo
 ```
 
 as연산자는 .ts와 .tsx파일 모두 사용할 수 있다.
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-> > > > > > > a3ee0015... 내장요소 추가
 
 #### 내장 요소 Intrinsic elements
 
@@ -752,33 +667,3 @@ class MyComponent extends React.Component<Props, {}> {
 <MyComponent foo='bar'> // 성공
 <MyCompoenet foo={0}> // error
 ```
-
-# <<<<<<< HEAD
-
-> > > > > > > # 3f1b45b0... 기본 데이터타입 추가
-> > > > > > >
-> > > > > > > # 5caf73d7... any 내용 추가
-> > > > > > >
-> > > > > > > # db9acdce... 데이터 타입 추가 never null undef
-> > > > > > >
-> > > > > > > # c88a5088... 타입 단언 추가
-> > > > > > >
-> > > > > > > # f2e6c217... 프로퍼티 내용 업로드
-> > > > > > >
-> > > > > > > # 6aa8a626... 함수 타입 추가
-> > > > > > >
-> > > > > > > # 323cbb7b... 함수 타입 추가
-> > > > > > >
-> > > > > > > # c1595bf1... 제너릭 추가
-> > > > > > >
-> > > > > > > # 877b26ae... 제너릭 타입 변수 추가
-> > > > > > >
-> > > > > > > # cf2b4edd... 제너릭 내용 추가
-> > > > > > >
-> > > > > > > # 205d8d79... 타입 별칭 추가
-> > > > > > >
-> > > > > > > # 815ff091... 인터페이스와 타입별칭
-> > > > > > >
-> > > > > > > # f74452d3... jsx as 업로드
-> > > > > > >
-> > > > > > > a3ee0015... 내장요소 추가
