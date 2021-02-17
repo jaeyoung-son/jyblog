@@ -111,3 +111,65 @@ export default {
 export const standard = () => <Hello name="재영스토리북" />
 export const big = () => <Hello name="재영스토리북" big />
 ```
+
+위와 같이 컴포넌트와 스토리를 만들어주고 나면, Storybook에서 Components/basic/hello 라는 스토리가 생기게 되고,
+그 하위에 Standard 와 Big의 스토리가 보이게 됩니다.  
+주석의 내용대로 export default 를 통해 내보낼 때 title 값은 스토리북에서 보여지는 그룹과 경로를 나타내고,
+component는 해당 컴포넌트를 가리킵니다.
+
+## Knobs 애드온 적용
+
+Knobs 애드온은 컴포넌트의 props를 스토리북 화면에서 바꾸고 바로 반영시킬 수 있게 해줍니다.
+
+패키지 설치
+
+```
+npm i --save-dev @storybook/addon-knobs
+```
+
+패키지를 설치한 뒤, .main.js 에 addob 추가해줍니다.
+
+```js
+// .storybook/main.js
+module.exports = {
+  stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
+  addons: [
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    '@storybook/addon-knobs',
+  ],
+}
+```
+
+그 후 Hello.stories.js 에 knobs애드온을 적용합니다.
+
+```jsx
+// Hello/Hello.stories.js
+...
+import { withKnobs } from '@storybook/addon-knobs';
+export default {
+  title: 'components/basic/Hello', // 스토리북에서 보여질 그룹과 경로
+  component: Hello, // 어떤 컴포넌트를 문서화 할지
+  decorators: [withKnobs], // 애드온 적용
+};
+
+```
+
+그 후 knobs를 만들어 줍니다.
+
+```jsx
+// Hello/Hello.stories.js
+...
+import { boolean, text, withKnobs } from '@storybook/addon-knobs';
+
+export const hello = () => {
+  // knobs 만들기
+  const big = boolean('big', false);
+  const name = text('name', '재영스토리북');
+  return <Hello name={name} big={big} />;
+};
+
+hello.story = {
+  name: 'Default',
+};
+```
