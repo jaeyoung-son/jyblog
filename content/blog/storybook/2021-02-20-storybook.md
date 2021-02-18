@@ -173,3 +173,33 @@ hello.story = {
   name: 'Default',
 };
 ```
+
+default라는 이름으로 Knobs를 사용하는 새 스토리를 만들었는데, 기본적으로 export const를 사용해서 default라는
+이름으로 내보내려면 키워드가 충돌하기 때문에 내보낼 수 없습니다.
+그 대신 스토리를 만들고 해당 스토리의 멤버 변수로 story 객체를 설정해서 이름을 변경할 수 있습니다.
+
+위와같이 적용하면 스토리북에서 하단 Actionds 옆에 Knobs탭이 생기게되고, big Props를 전달하는 토글 버튼과
+name값을 설정하는 text입력창이 생기게 됩니다.
+
+## Knobs의 종류들
+
+- text: 텍스트를 입력합니다.
+- boolean: true/false 값을 체크박스로 설정합니다.
+- number: 숫자를 입력 할 수 있습니다. (1~10 처럼간격설정 가능)
+- color: 컬러 팔레트를 통해 색상설정을 할 수 있습니다.
+- object: JSON 형태로 객체 또는 배열을 설정 할 수 있습니다.
+- array: 쉼표로 구분된 텍스트 형태로 배열을 설정 할 수 있습니다.
+- select: 셀렉트 박스를 통해 여러 옵션 중 하나를 선택 할 수있습니다.
+- radios: 라디오 버튼을 통해 여러 옵션 중 하나를 선택 할 수 있습니다.
+- options: 여러가지 옵션을 선택하는 UI를 커스터마이징 할 수 있습니다.(radio, inline-radio, check, select ...)
+- files: 파일을 선택할 수 있습니다.
+- date: 날짜를 선택할 수 있습니다.
+- button: 특정 함수를 실행하게 하는 버튼을 만들 수 있습니다.
+
+Knobs를 사용 할 때 넣어야 하는 인자는 Knobs의 이름, 기본값, group id 가 있습니다. 그룹아이디는 생략이 가능합니다.
+
+```js
+const big = boolean('big', false, 'Group 1')
+```
+
+위처럼 그룹을 설정해주면 스토리북에서 Knobs를 클릭했을때 그룹이 분류되어 나타납니다.
