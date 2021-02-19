@@ -203,3 +203,57 @@ const big = boolean('big', false, 'Group 1')
 ```
 
 위처럼 그룹을 설정해주면 스토리북에서 Knobs를 클릭했을때 그룹이 분류되어 나타납니다.
+
+## Actions 애드온 적용
+
+Actions 애드온은 컴포넌트를 통해 특정 함수가 호출됐을때 어떤 함수가 호출됐는지, 어떤 매개변수를 넣어서 호출했는지에 대한
+정보를 확인할 수 있게 해주는 애드온 입니다.  
+리액트 라우터의 주소가 변경될 때나, 리덕스 스토어의 디스패치가 발생할 때 디스패치 되는
+액션의 정보를 보는것도 가능합니다.  
+설치는 첫 프로젝트 셋팅에 storybook CLI를 사용했는데, 이때는 별도로 설치할 필요가 없습니다.  
+Hello 컴포넌트에 함수 적용
+
+```jsx
+// Hello/Hello.js
+function Hello({ name, big, onHello, onBye }) {
+  return (
+    <div>
+      {big ? <h1>안녕하세요, {name}</h1> : <p>안녕하세요, {name}</p>}
+      <div>
+        <button onClick={onHello}>Hello</button>
+        <button onClick={onBye}>Bye</button>
+      </div>
+    </div>
+  )
+}
+
+export default Hello
+```
+
+onHello 와 onBye 함수를 props로 전달받아 button을 만들어 클릭 이벤트를 등록해줍니다.  
+그 후 Hello의 스토리 파일을 수정합니다.
+
+```jsx
+// Hello/Hello.stories.js
+...
+import { action } from '@storybook/addon-actions';
+...
+export const hello = () => {
+  // knobs 만들기
+  const big = boolean('big', false);
+  const name = text('name', '재영스토리북');
+  return (
+    <Hello
+      name={name}
+      big={big}
+      onHello={action('onHello')}
+      onBye={action('onBye')}
+    />
+  );
+};
+
+```
+
+새로운 액션을 만들 땐 action('액션이름')으로 작성합니다.  
+스토리북을 확인해보면 버튼 클릭 시 Actions탭에 발생한 액션들이 잘 나타나고 있습니다.  
+각 함수를 Hello에 props로 전달할때의 값을 함수호출로 넘겨주는데 헷갈릴 수 있으니 유의해야 겠습니다.
