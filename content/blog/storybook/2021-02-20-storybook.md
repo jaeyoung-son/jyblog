@@ -257,3 +257,34 @@ export const hello = () => {
 새로운 액션을 만들 땐 action('액션이름')으로 작성합니다.  
 스토리북을 확인해보면 버튼 클릭 시 Actions탭에 발생한 액션들이 잘 나타나고 있습니다.  
 각 함수를 Hello에 props로 전달할때의 값을 함수호출로 넘겨주는데 헷갈릴 수 있으니 유의해야 겠습니다.
+
+## Docs 애드온 적용
+
+Docs 애드온은 MDX(파일형식) 형식으로 문서를 작성할 수 있게 해주고, 컴포넌트의 props와 주석에 기반하여
+자동으로 문서를 생성해줍니다.  
+우선 애드온 패키지를 설치합니다.
+
+```
+npm install --save-dev @storybook/addon-docs
+```
+
+그 후 .storybook/main.js 에 애드온을 추가하고 mdx확장자도 처리하도록 정규식을 수정합니다.
+
+```js
+module.exports = {
+  stories: [
+    '../src/**/*.stories.mdx',
+    '../src/**/*.stories.@(js|jsx|ts|tsx|mdx)',
+  ],
+  addons: [
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    '@storybook/addon-knobs',
+    '@storybook/addon-docs',
+  ],
+}
+```
+
+그 후 스토리북에서 Canvans 옆에 Docs 탭을 클릭해보면,
+No inputs found for this component.
+Read the docs 라는 메시지가 나옵니다.
