@@ -288,3 +288,57 @@ module.exports = {
 그 후 스토리북에서 Canvans 옆에 Docs 탭을 클릭해보면,
 No inputs found for this component.
 Read the docs 라는 메시지가 나옵니다.
+
+### Props 문서화 하기
+
+Props를 채우기 위해 props-types 또는 타입스크립트를 사용하면 그에 기반해서 자동으로 props table을 만들어줍니다.
+deafaultProps도 지정해주면 이를 추출해서 보여줄 수 있습니다.
+
+```jsx
+import PropTypes from 'prop-types';
+...
+Hello.propTypes = {
+  // 보여주고 싶은 이름
+  name: PropTypes.string.isRequired,
+  // 값이 true면 h1태그로 렌더링
+  big: PropTypes.bool,
+  // Hello 버튼 클릭 시 호출 함수
+  onHello: PropTypes.func,
+  // Bye 버튼 클릭 시 호출 함수
+  onBye: PropTypes.func,
+};
+
+Hello.defaultProps = {
+  big: false,
+};
+```
+
+위처럼 propTypes를 설정 할 때 props위에
+
+```js
+/** 내용 */
+```
+
+주석으로 내용을 채우면 이 내용이 문서에서 나타납니다.  
+이제 Docs탭을 눌러보면 name,big,onHello,onBye props가 정리되어 주석에 적혀있는 내용대로 description이
+추가되어 나타납니다.
+또한 defaultProps를 설정해준 big은 default false로 나타납니다.
+
+### 컴포넌트 부제목 및 설명 추가
+
+컴포넌트에 부 제목을 설정하기 위해서는 스토리의 parameters부분을 설정해줍니다.
+
+```js
+// Hello/Hello.stories.js
+export default {
+  title: 'components/basic/Hello', // 스토리북에서 보여질 그룹과 경로
+  component: Hello, // 어떤 컴포넌트를 문서화 할지
+  decorators: [withKnobs], // 애드온 적용
+  parameters: {
+    componentSubtitle: '"안녕하세요" 컴포넌트',
+  },
+}
+```
+
+위처럼 parameters에 componentSubtitle값을 추가해주면 넣어준 값대로 스토리북에 부제목이 표시됩니다.  
+설명을 추가 할 때는 컴포넌트 파일에서 컴포넌트 코드 바로 윗 부분에 주석으로 작성합니다.
