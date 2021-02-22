@@ -342,3 +342,95 @@ export default {
 
 위처럼 parameters에 componentSubtitle값을 추가해주면 넣어준 값대로 스토리북에 부제목이 표시됩니다.  
 설명을 추가 할 때는 컴포넌트 파일에서 컴포넌트 코드 바로 윗 부분에 주석으로 작성합니다.
+
+```jsx
+// Hello/Hello.js
+/**
+ * 안녕하세요 라고 보여주고 싶을 땐 `Hello` 컴포넌트를 사용하세요.
+ *
+ * - `big` 값을 `true`로 설정하면 **크게** 나타납니다.
+ * - `onHello` 와 `onBye` props로 설정하여 버튼이 클릭했을 때 호출 할 함수를 지정 할 수 있습니다.
+ */
+
+function Hello({ name, big, onHello, onBye }) {
+  ...
+```
+
+설명을 작성할 때는 멀티라인 주석을 작성해서 시작 부분이 /\*\* 와 같은 형태로 작성해야 Docs가 만들어질 때
+이를 파싱합니다.  
+위와같이 적용해주고 나면 스토리북의 컴포넌트 제목 부제목 밑에 작성한 설명이 보이게 됩니다.
+
+## MDX로 문서 작성
+
+MDX를 사용하면 마크다운형식으로 리액트 컴포넌트를 편리하게 문서화 할 수 있습니다.  
+DocsPage로 설명을 추가하며 문서화를 할 때는 정해진 형식에 공간이 고정되어있기 때문에 제한적인 부분이 있지만,
+MDX를 사용한다면 원하는 곳 어디든지 설명을 추가 할 수 있기 때문에 자유롭게 문서화가 가능합니다.  
+따라서 컴포넌트 이외에도 색상, 타이포그래피에 관한 문서에 대한 설명을 작성할 때도 유용합니다.
+
+Hello.mdx라는 파일을 만들어서 작성해보겠습니다.
+
+```jsx
+// Hello/Hello.mdx
+import Hello from './Hello';
+import {
+  Story,
+  Props,
+  Description,
+  Preview,
+} from '@storybook/addon-docs/blocks';
+
+# Hello
+
+<Hello name="MDX" big={true} />
+<Description of={Hello} />
+
+## Props
+
+이 컴포넌트에서 사용되는 Props들
+
+<Props of={Hello} />
+
+## 작은 Helllo
+
+<Preview>
+  <Story id="components-basic-hello--standard" />
+</Preview>
+
+작은 Hello 입니다.
+
+## 커다란 Hello
+
+'big' props를 true로 설정하면 커다란 Hello가 됩니다.
+
+<Preview>
+  <Story id="components-basic-hello--big" />
+</Preview>
+
+```
+
+MDX를 사용해서 컴포넌트들을 마크다운 내부에서 렌더링 할 수 있습니다.  
+'@storybook/addon-docs/blocks' 안에 있는 Block 컴포넌트를 사용하면 기존에 자동 생성된 DocsPage 에서
+보여줬었던 것 처럼 컴포넌트의 설명 및 Props정보를 추출하여 보여줄 수 있습니다.
+사전에 만든 스토리들을 DocsPage안에서 보여줄 때는 Story컴포넌트에 id Props를 전달해야 하는데,
+이 id값은 스토리북에서 스토리를 선택했을 때 주소창 story/{id}을 확인하면 확인이 가능합니다.  
+mdx 파일을 작성한 뒤. 전에 만들었던 스토리 파일에서 docs파라미터를 수정합니다.
+
+```js
+// Hello/Hello.stories.js
+...
+import mdx from './Hello.mdx';
+
+export default {
+  title: 'components/basic/Hello', // 스토리북에서 보여질 그룹과 경로
+  component: Hello, // 어떤 컴포넌트를 문서화 할지
+  decorators: [withKnobs], // 애드온 적용
+  parameters: {
+    componentSubtitle: '"안녕하세요" 컴포넌트',
+    docs: {
+      page: mdx,
+    },
+  },
+};
+```
+
+위와 같이 파라미터를 설정해주고 Docs페이지를 확인하면 작성한 mdx파일대로 커스터마이징 된 상태로 보여집니다.
