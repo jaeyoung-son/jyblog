@@ -434,3 +434,58 @@ export default {
 ```
 
 위와 같이 파라미터를 설정해주고 Docs페이지를 확인하면 작성한 mdx파일대로 커스터마이징 된 상태로 보여집니다.
+
+## MDX로만 스토리 작성
+
+stories.js 파일을 따로 만들지 않고 mdx파일 내부에서 모든 작업도 가능합니다.
+
+Bye.js 컴포넌트를 새로 만듭니다.
+
+```jsx
+// Bye/Bye.js
+
+import React from 'react'
+import PropTypes from 'prop-types'
+
+const Bye = ({ name }) => {
+  return <p>안녕히 가세요, {name}</p>
+}
+
+Bye.propTypes = {
+  name: PropTypes.string,
+}
+
+export default Bye
+```
+
+그 후 Bye.stories.mdx 파일을 만듭니다.
+
+```jsx
+// Bye/Bye.stories.mdx
+
+import { Meta, Story, Props, Preview } from '@storybook/addon-docs/blocks';
+import Bye from './Bye';
+import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+
+<Meta title="components|basic/Bye" component={Bye} decorators={[withKnobs]} />
+
+# Button
+
+<Preview>
+  <Story name="Default">
+    <Bye name={text('name', 'stories.js')} />
+  </Story>
+</Preview>
+
+## Props
+
+<Props of={Bye} />
+
+```
+
+Meta Block을 사용하면 기존에 CSF 형태로 스토리를 작성할 때 넣어주는 값들을 설정할 수 있습니다.  
+Docs 애드온을 통하여 자동으로 만들어진 문서에서 제공하는 정보가 부족해서 컴포넌트의 기능을 자세하게 표현하기 어려운 상황이라면
+mdx를 사용하면 됩니다.
+컴포넌트가 아닌 Introduction, Colors, Typography 등은 MDX-only로 작성하면 됩니다.  
+컴포넌트에 대한 MDX를 작성할 때는 MDX-only로 문서를 작성하게 된다면 Typescript를 사용할때 IDE에서 .mdx확장자에 대한
+타입스크립트 지원이 제대로 이루어지지 않습니다.
