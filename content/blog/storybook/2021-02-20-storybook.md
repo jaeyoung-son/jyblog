@@ -489,3 +489,59 @@ mdx를 사용하면 됩니다.
 컴포넌트가 아닌 Introduction, Colors, Typography 등은 MDX-only로 작성하면 됩니다.  
 컴포넌트에 대한 MDX를 작성할 때는 MDX-only로 문서를 작성하게 된다면 Typescript를 사용할때 IDE에서 .mdx확장자에 대한
 타입스크립트 지원이 제대로 이루어지지 않습니다.
+
+## 타입스크립트로 props 문서화
+
+스토리북에서 props를 나타내기 위해 propTypes를 사용했었는데,
+타입스크립트를 사용하면 proptypes를 대체 할 수 있습니다.  
+우선 타입스크립트의 tsconfig파일을 루트 디렉토리에 작성해줍니다.
+
+```json
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react"
+  },
+  "include": ["src"]
+}
+```
+
+그 후 main.js에 타입스크립트 필드를 사용합니다.
+
+```js
+// .storybook/main.js
+
+module.exports = {
+  stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
+  addons: [
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    '@storybook/addon-knobs',
+    '@storybook/addon-docs',
+  ],
+  typescript: {
+    check: false,
+    checkOptions: {},
+    reactDocgen: 'react-docgen-typescript',
+    reactDocgenTypescriptOptions: {
+      shouldExtractLiteralValuesFromEnum: true,
+      propFilter: prop =>
+        prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
+    },
+  },
+}
+```
+
+그리고 ts파일에서 mdx 파일을 불러오면 모듈이 없다는 에러가 생기기 때문에 typings.d.ts 파일을 만들어줍니다.
