@@ -545,3 +545,50 @@ module.exports = {
 ```
 
 그리고 ts파일에서 mdx 파일을 불러오면 모듈이 없다는 에러가 생기기 때문에 typings.d.ts 파일을 만들어줍니다.
+
+```js
+// src/typings.d.ts
+
+declare module '*.mdx';
+```
+
+이제 기존에 만들었던 Hello 컴포넌트의 확장자를 tsx로 변경해주고 proptypes에서 명시해주던 props들을
+타입스크립트로 타입을 지정해줍니다.
+
+```tsx
+/// src/Hello/Hello.tsx
+
+import React from 'react'
+
+type HelloProps = {
+  /** 보여주고 싶은 이름 */
+  name: string
+  /** 이 값을 `true` 로 설정하면 h1 태그로 렌더링합니다. */
+  big?: boolean
+  /** Hello 버튼 누를 때 호출 할 함수 */
+  onHello?: () => void
+  /** Bye 버튼 누를 때 호출 할 함수 */
+  onBye?: () => void
+}
+
+function Hello({ name, big, onHello, onBye }: HelloProps) {
+  return (
+    <div>
+      {big ? <h1>안녕하세요, {name}</h1> : <p>안녕하세요, {name}</p>}
+      <div>
+        <button onClick={onHello}>Hello</button>
+        <button onClick={onBye}>Bye</button>
+      </div>
+    </div>
+  )
+}
+
+Hello.defaultProps = {
+  big: false,
+}
+
+export default Hello
+```
+
+그리고 stories.js 파일도 stories.tsx로 변경해줍니다.  
+다시 스토리북을 키게되면 스토리북 페이지가 제대로 보이는걸 확인할 수 있습니다.
