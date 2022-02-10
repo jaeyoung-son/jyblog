@@ -1,7 +1,7 @@
 ---
 title: 'about'
 date: 2022-01-19 16:21:13
-lang: 'kr'
+lang: 'en'
 ---
 
 <div >
