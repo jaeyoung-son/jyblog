@@ -15,7 +15,7 @@ lang: 'en'
 |            |                                 |
 | :--------: | ------------------------------- |
 | **Github** | https://github.com/jaeyoung-son |
-|  **Blog**  | https://jyblog.netlify.app/     |
+|  **Blog**  | https://jaeyoung-son.github.io/ |
 | **E-mail** | zkqkzl2@gmail.com               |
 
 ## 기술 이력
