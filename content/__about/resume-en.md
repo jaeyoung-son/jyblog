@@ -31,9 +31,32 @@ lang: 'en'
 
 ## 개발 경력
 
+### 브레이크앤컴퍼니
+
+2022.6 - 2023.7
+
+BRG 서비스
+
+- typescript / next / mui / emotion / react-query / recoil
+- 브레이크앤컴퍼니 카드 그레이딩 서비스
+- 기존 react 프로젝트 next로 마이그레이션 진행
+- vercel + github actions CI/CD 구축
+- react profiler를 통한 컴포넌트 구조 개선, 렌더링 최적화
+
+사내 백오피스 어드민
+
+- typescript / react / mui / emotion / react-query
+- 운영 업무를 위한 사내 백오피스 서비스
+- AWS S3, Cloud Front static deploy
+
+BRG Card Global
+
+- next.js / typescript / mui / emotion / react-query
+- BRG 글로벌 웹 랜딩 페이지
+
 ### 나인투원
 
-2021.02 ~ 현재
+2021.02 ~ 2022.04
 
 사내 백오피스 어드민 웹
 
